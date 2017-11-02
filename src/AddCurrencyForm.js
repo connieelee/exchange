@@ -14,6 +14,8 @@ const AddCurrencyForm = ({ submitCurrency }) => (
       <p>What is its monetary value?</p>
       <input
         type="number"
+        step="0.01"
+        min="0"
         name="monetary-value"
         placeholder="4.95"
       />USD

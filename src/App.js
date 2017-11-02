@@ -2,6 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
+import _ from 'lodash';
+
 import Home from './Home';
 import AddCurrencyForm from './AddCurrencyForm';
 
@@ -10,10 +12,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       savedCurrencies: {},
-      // activeCurrency: {
-      //   name: '',
-      //   value: null,
-      // },
     };
   }
 
@@ -23,8 +21,13 @@ class App extends React.Component {
     });
 
     chrome.storage.onChanged.addListener(changes => {
-      // TODO: update state with changes
-      console.log('STORAGE CHANGED. CHANGES:', changes);
+      this.setState(prevState => {
+        const nextState = _.cloneDeep(prevState);
+        Object.keys(changes).forEach(currency => {
+          nextState.savedCurrencies[currency] = changes[currency].newValue;
+        });
+        return nextState;
+      });
     });
   }
 
@@ -32,9 +35,7 @@ class App extends React.Component {
     event.preventDefault();
     const currency = event.target['custom-currency'].value;
     const monetaryValue = event.target['monetary-value'].value;
-    chrome.storage.sync.set({ [currency]: monetaryValue }, () => {
-      console.log(`SUCCESSFULLY SAVED NEW CURRENCY ${currency}($${monetaryValue})`);
-    });
+    chrome.storage.sync.set({ [currency]: monetaryValue });
   }
 
   render() {
