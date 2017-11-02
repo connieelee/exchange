@@ -11,12 +11,14 @@
   "license": "ISC",
   "scripts": {
     "build": "webpack",
-    "build-watch": "webpack -w",
+    "build-dev": "react-devtools & webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
