@@ -11,7 +11,8 @@
   "license": "ISC",
   "scripts": {
     "build": "webpack",
-    "build-dev": "react-devtools & webpack -w",
+    "build-watch": "webpack -w",
+    "build-dev": "react-devtools & npm run build-watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
