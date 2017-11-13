@@ -14,18 +14,24 @@ export const loadCurrencies = () => dispatch => {
   chrome.storage.sync.get(null, currencies => {
     const currencyArr = [];
     Object.keys(currencies).forEach(currencyName => {
-      currencyArr.push({
-        name: currencyName,
-        value: currencies[currencyName],
-      });
+      if (currencyName !== '_DEFAULT_') {
+        currencyArr.push({
+          name: currencyName,
+          value: currencies[currencyName],
+        });
+      }
     });
     dispatch(setCurrencies(currencyArr));
   });
 };
 export const saveNewCurrency = (name, value) => dispatch => {
-  chrome.storage.sync.set({ [name]: value }, () => {
-    dispatch(addCurrency(name, value));
-  });
+  if (name === '_DEFAULT_') {
+    console.error('cannot save a currency with name "_DEFAULT_"');
+  } else {
+    chrome.storage.sync.set({ [name]: value }, () => {
+      dispatch(addCurrency(name, value));
+    });
+  }
 };
 
 export default (prevState = [], action) => {
