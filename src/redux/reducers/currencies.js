@@ -29,14 +29,12 @@ export const saveNewCurrency = (name, value) => dispatch => {
 };
 
 export default (prevState = [], action) => {
-  const nextState = Object.assign({}, prevState);
   switch (action.type) {
     case SET_CURRENCIES: {
       return action.currencies;
     }
     case ADD_CURRENCY: {
-      nextState.push(action.currencyData);
-      return nextState;
+      return [...prevState, action.currencyData];
     }
     default: {
       return prevState;
