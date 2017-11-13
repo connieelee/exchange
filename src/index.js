@@ -8,6 +8,7 @@ import store from './redux/store';
 import {
   Home,
   AddCurrencyForm,
+  ManageCurrencies,
 } from './components';
 
 ReactDOM.render(
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/index.html" component={Home} />
         <Route path="/add" component={AddCurrencyForm} />
+        <Route path="/manage" component={ManageCurrencies} />
       </Switch>
     </BrowserRouter>
   </Provider>,

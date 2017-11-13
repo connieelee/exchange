@@ -11,7 +11,7 @@ export const loadDefault = () => dispatch => {
   });
 };
 export const saveNewDefault = currencyData => dispatch => {
-  chrome.storage.sync.set({ __DEFAULT: currencyData }, () => {
+  chrome.storage.sync.set({ _DEFAULT_: currencyData }, () => {
     dispatch(setDefault(currencyData));
   });
 };
