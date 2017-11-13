@@ -43,7 +43,10 @@ class Home extends React.Component {
             ))
           }
         </ul>
-        <p>default currency: {defaultCurrency.name} (${defaultCurrency.value})</p>
+        {
+          defaultCurrency &&
+          <p>default currency: {defaultCurrency.name} (${defaultCurrency.value})</p>
+        }
         <Link to="/add"><button>Add currency</button></Link>
       </div>
     );
