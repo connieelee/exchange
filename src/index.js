@@ -1,9 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { Switch, Route } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
-import App from './App';
+import store from './redux/store';
+import {
+  Home,
+  AddCurrencyForm,
+} from './components';
 
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/index.html" component={Home} />
+        <Route path="/add" render={AddCurrencyForm} />
+      </Switch>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'),
 );
