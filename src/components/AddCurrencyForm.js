@@ -7,8 +7,8 @@ const mapState = null;
 const mapDispatch = dispatch => ({
   submitCurrency: event => {
     event.preventDefault();
-    const name = event.target['custom-currency'].value;
-    const value = event.target['monetary-value'].value;
+    const name = event.target['currency-name'].value;
+    const value = event.target['currency-value'].value; // eslint-disable-line prefer-destructuring
     dispatch(saveNewCurrency(name, value));
   },
 });
@@ -19,7 +19,7 @@ const AddCurrencyForm = ({ submitCurrency }) => (
       <p>What is your custom currency?</p>
       <input
         type="text"
-        name="custom-currency"
+        name="currency-name"
         placeholder="e.g. Cheeseburgers..."
       />
     </div>
@@ -29,7 +29,7 @@ const AddCurrencyForm = ({ submitCurrency }) => (
         type="number"
         step="0.01"
         min="0"
-        name="monetary-value"
+        name="currency-value"
         placeholder="4.95"
       />USD
     </div>

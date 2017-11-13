@@ -7,13 +7,19 @@ const setCurrencies = currencies => ({
 });
 const addCurrency = (name, value) => ({
   type: ADD_CURRENCY,
-  name,
-  value,
+  currencyData: { name, value },
 });
 
 export const loadCurrencies = () => dispatch => {
   chrome.storage.sync.get(null, currencies => {
-    dispatch(setCurrencies(currencies));
+    const currencyArr = [];
+    Object.keys(currencies).forEach(currencyName => {
+      currencyArr.push({
+        name: currencyName,
+        value: currencies[currencyName],
+      });
+    });
+    dispatch(setCurrencies(currencyArr));
   });
 };
 export const saveNewCurrency = (name, value) => dispatch => {
@@ -22,14 +28,14 @@ export const saveNewCurrency = (name, value) => dispatch => {
   });
 };
 
-export default (prevState = {}, action) => {
+export default (prevState = [], action) => {
   const nextState = Object.assign({}, prevState);
   switch (action.type) {
     case SET_CURRENCIES: {
       return action.currencies;
     }
     case ADD_CURRENCY: {
-      nextState[action.name] = action.value;
+      nextState.push(action.currencyData);
       return nextState;
     }
     default: {

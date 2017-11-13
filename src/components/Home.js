@@ -23,12 +23,11 @@ class Home extends React.Component {
         <p>your currencies</p>
         <ul>
           {
-            Object.keys(this.props.currencies)
-              .map(currency => (
-                <li key={currency}>
-                  {currency}: {this.props.currencies[currency]}
-                </li>
-              ))
+            this.props.currencies.map(currency => (
+              <li key={currency.name}>
+                {currency.name}: {currency.value}
+              </li>
+            ))
           }
         </ul>
         <Link to="/add"><button>Add currency</button></Link>
