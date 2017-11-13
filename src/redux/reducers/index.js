@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import savedCurrencies from './savedCurrencies';
+import currencies from './currencies';
 import defaultCurrency from './defaultCurrency';
 
 export default combineReducers({
-  savedCurrencies,
+  currencies,
   defaultCurrency,
 });

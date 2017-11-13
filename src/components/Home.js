@@ -2,28 +2,36 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { loadSavedCurrencies } from '../redux/reducers/savedCurrencies';
-import { loadDefaultCurrency } from '../redux/reducers/defaultCurrency';
+import { loadCurrencies } from '../redux/reducers/currencies';
 
-const mapState = null;
+const mapState = state => ({
+  currencies: state.currencies,
+});
 const mapDispatch = dispatch => ({
-  loadSavedCurrencies: () => dispatch(loadSavedCurrencies()),
-  loadDefaultCurrency: () => dispatch(loadDefaultCurrency()),
+  loadCurrencies: () => dispatch(loadCurrencies()),
 });
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.loadSavedCurrencies();
-    this.props.loadDefaultCurrency();
+    this.props.loadCurrencies();
   }
 
   render() {
     return (
       <div>
         <h1>exchange</h1>
-        <p>description and stuff</p>
-        {/* <Link to="/edit"><button>Update currencies</button></Link> */}
-        {/* <Link to="/set"><button>Set new default</button></Link> */}
+        <p>your currencies</p>
+        <ul>
+          {
+            Object.keys(this.props.currencies)
+              .map(currency => (
+                <li key={currency}>
+                  {currency}: {this.props.currencies[currency]}
+                </li>
+              ))
+          }
+        </ul>
+        {/* <Link to="/edit"><button>Manage currencies</button></Link> */}
         <Link to="/add"><button>Add currency</button></Link>
       </div>
     );

@@ -5,12 +5,6 @@ const setDefault = currency => ({
   currency,
 });
 
-export const loadDefaultCurrency = () => dispatch => {
-  chrome.storage.sync.get('defaultCurrency', currency => {
-    dispatch(setDefault(currency));
-  });
-};
-
 export default (prevState = {}, action) => {
   switch (action.type) {
     case SET_DEFAULT: {
