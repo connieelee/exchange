@@ -31,7 +31,6 @@ class Home extends React.Component {
               ))
           }
         </ul>
-        {/* <Link to="/edit"><button>Manage currencies</button></Link> */}
         <Link to="/add"><button>Add currency</button></Link>
       </div>
     );

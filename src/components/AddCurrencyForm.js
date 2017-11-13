@@ -1,4 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { saveNewCurrency } from '../redux/reducers/currencies';
+
+const mapState = null;
+const mapDispatch = dispatch => ({
+  submitCurrency: event => {
+    event.preventDefault();
+    const name = event.target['custom-currency'].value;
+    const value = event.target['monetary-value'].value;
+    dispatch(saveNewCurrency(name, value));
+  },
+});
 
 const AddCurrencyForm = ({ submitCurrency }) => (
   <form onSubmit={submitCurrency}>
@@ -24,4 +37,4 @@ const AddCurrencyForm = ({ submitCurrency }) => (
   </form>
 );
 
-export default AddCurrencyForm;
+export default connect(mapState, mapDispatch)(AddCurrencyForm);

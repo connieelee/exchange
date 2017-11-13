@@ -15,7 +15,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route path="/index.html" component={Home} />
-        <Route path="/add" render={AddCurrencyForm} />
+        <Route path="/add" component={AddCurrencyForm} />
       </Switch>
     </BrowserRouter>
   </Provider>,
