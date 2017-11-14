@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -34,5 +35,19 @@ const ManageCurrencies = ({ currencies, defaultCurrency, saveNewDefault }) => (
     </ul>
   </div>
 );
+
+ManageCurrencies.propTypes = {
+  currencies: PropTypes.arrayOf(PropTypes.object),
+  defaultCurrency: PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.number,
+  }),
+  saveNewDefault: PropTypes.func.isRequired,
+};
+
+ManageCurrencies.defaultProps = {
+  currencies: [],
+  defaultCurrency: {},
+};
 
 export default connect(mapState, mapDispatch)(ManageCurrencies);
