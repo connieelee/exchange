@@ -26,7 +26,7 @@ export const loadCurrencies = () => dispatch => {
 };
 export const saveNewCurrency = (name, value) => dispatch => {
   if (name === '_DEFAULT_') {
-    console.error('cannot save a currency with name "_DEFAULT_"');
+    console.error('cannot save a currency with name "_DEFAULT_"'); // TODO: handle more elegantly
   } else {
     chrome.storage.sync.set({ [name]: value }, () => {
       dispatch(addCurrency(name, value));

@@ -10,7 +10,7 @@ const mapDispatch = dispatch => ({
   submitCurrency: event => {
     event.preventDefault();
     const name = event.target['currency-name'].value;
-    const value = event.target['currency-value'].value; // eslint-disable-line prefer-destructuring
+    const value = parseFloat(event.target['currency-value'].value);
     dispatch(saveNewCurrency(name, value));
   },
 });
