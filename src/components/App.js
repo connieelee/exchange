@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,15 +13,15 @@ import { loadDefault } from '../redux/reducers/defaultCurrency';
 
 const mapState = null;
 const mapDispatch = dispatch => ({
-  loadCurrencies: () => dispatch(loadCurrencies()),
-  loadDefault: () => dispatch(loadDefault()),
+  loadInitialData: () => {
+    dispatch(loadCurrencies());
+    dispatch(loadDefault());
+  },
 });
 
 class App extends React.Component {
   componentDidMount() {
-    const { loadCurrencies, loadDefault } = this.props;
-    this.props.loadCurrencies();
-    this.props.loadDefault();
+    this.props.loadInitialData();
   }
 
   render() {
@@ -35,5 +36,9 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  loadInitialData: PropTypes.func.isRequired,
+};
 
 export default connect(mapState, mapDispatch)(App);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -20,5 +21,15 @@ const Home = ({ defaultCurrency }) => (
     <div><Link to="/add"><button>Add currency</button></Link></div>
   </div>
 );
+
+Home.propTypes = {
+  defaultCurrency: PropTypes.shape({
+    name: PropTypes.string,
+    value: PropTypes.number,
+  }),
+};
+Home.defaultProps = {
+  defaultCurrency: {},
+};
 
 export default connect(mapState, mapDispatch)(Home);

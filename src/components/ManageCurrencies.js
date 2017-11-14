@@ -10,10 +10,10 @@ const mapState = state => ({
   defaultCurrency: state.defaultCurrency,
 });
 const mapDispatch = dispatch => ({
-  saveNewDefault: currencyData => dispatch(saveNewDefault(currencyData)),
+  onDefaultClick: currencyData => dispatch(saveNewDefault(currencyData)),
 });
 
-const ManageCurrencies = ({ currencies, defaultCurrency, saveNewDefault }) => (
+const ManageCurrencies = ({ currencies, defaultCurrency, onDefaultClick }) => (
   <div>
     <p>Manage Your Currencies</p>
     <Link to="/index.html"><button>back to home</button></Link>
@@ -25,7 +25,7 @@ const ManageCurrencies = ({ currencies, defaultCurrency, saveNewDefault }) => (
             {
               currency.name === defaultCurrency.name ?
               ' (IS DEFAULT)' :
-              <button onClick={() => { saveNewDefault(currency); }}>
+              <button onClick={() => { onDefaultClick(currency); }}>
                 set as default
               </button>
             }
@@ -42,9 +42,8 @@ ManageCurrencies.propTypes = {
     name: PropTypes.string,
     value: PropTypes.number,
   }),
-  saveNewDefault: PropTypes.func.isRequired,
+  onDefaultClick: PropTypes.func.isRequired,
 };
-
 ManageCurrencies.defaultProps = {
   currencies: [],
   defaultCurrency: {},
